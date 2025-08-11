@@ -9,13 +9,28 @@ import SwiftUI
 
 struct BookListView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                Text("Hello, world!")
+            }
+            .navigationTitle("BookList")
+            .toolbar {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundStyle(.orange)
+                        .imageScale(.large)
+                }
+
+                    
+            }
+            
         }
-        .padding()
+       
     }
 }
 
