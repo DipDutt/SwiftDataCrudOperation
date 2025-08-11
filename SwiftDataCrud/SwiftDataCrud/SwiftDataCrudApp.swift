@@ -16,4 +16,8 @@ struct SwiftDataCrudApp: App {
         }
         .modelContainer(for:Book.self)
     }
+    
+    init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false)) // inspect and find save data
+    }
 }
