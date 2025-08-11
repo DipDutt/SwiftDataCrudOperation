@@ -30,6 +30,13 @@ struct NewBookView: View {
                 .disabled(bookTitle.isEmpty || authorName.isEmpty)
                 .navigationTitle("NewBook")
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+                }
             }
         }
     }
