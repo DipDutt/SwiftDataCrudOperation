@@ -12,7 +12,7 @@ struct NewBookView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var bookTitle: String = ""
     @State private var authorName: String = ""
-    
+    @Environment(\.modelContext) private var context
     var body: some View {
         NavigationStack {
             Form {
