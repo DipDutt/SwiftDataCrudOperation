@@ -13,37 +13,53 @@ struct BookListView: View {
     @Query(sort:\Book.title) var books:[Book]
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(books) { book in
-                    NavigationLink {
-                        Text(book.title)
-                    } label: {
-                       
+            Group {
+                if books.isEmpty {
+                    ContentUnavailableView("Enter Your Book TO PRESS ➕ BUTTON IN THE TOP RIGHT CORNER ", systemImage: "book.fill")
+                }
+                
+                else {
+                    List {
+                        ForEach(books) { book in
+                            NavigationLink {
+                                Text(book.title)
+                            } label: {
+                                HStack(spacing: 5) {
+                                    book.iconImage
+                                    VStack(alignment: .leading) {
+                                        Text(book.title).font(.title2)
+                                        Text(book.author).foregroundStyle(.secondary)
+                                    }
+                                }
+                            }
+                            
+                        }
                     }
-
-                }
-            }
-            .listStyle(.plain)
-            .navigationTitle("BookList")
-            .toolbar {
-                Button {
-                    showSheet = true
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundStyle(.orange)
-                        .imageScale(.large)
-                }
-
+                    .listStyle(.plain)
                     
+                }
             }
-             // MARK: - present the sheet.
-            .sheet(isPresented: $showSheet) {
-                NewBookView()
-                    .presentationDetents([.medium,.large])
-            }
+            .navigationTitle("BookList")
+                .toolbar {
+                    Button {
+                        showSheet = true
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundStyle(.orange)
+                            .imageScale(.large)
+                    }
+                    
+                    
+                }
+            
+            // MARK: - present the sheet.
+                .sheet(isPresented: $showSheet) {
+                    NewBookView()
+                        .presentationDetents([.medium,.large])
+                }
             
         }
-       
+        
     }
 }
 
