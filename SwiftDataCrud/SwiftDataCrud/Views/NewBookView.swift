@@ -14,7 +14,22 @@ struct NewBookView: View {
     @State private var authorName: String = ""
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            Form {
+                TextField("BookTitle", text:$bookTitle)
+                TextField("AuthorName", text:$authorName)
+                Button("Create") {
+                    
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .buttonStyle(.borderedProminent)
+                .padding(.horizontal)
+                .padding(.vertical, 5)
+                .disabled(bookTitle.isEmpty || authorName.isEmpty)
+                .navigationTitle("NewBook")
+                .navigationBarTitleDisplayMode(.inline)
+            }
+        }
     }
 }
 
