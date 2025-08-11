@@ -5,7 +5,7 @@
 //  Created by Dip on 4/8/25.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 // MARK: -  Create Book model class
@@ -40,6 +40,17 @@ final class Book {
         self.summary = summary
         self.rating = rating
         self.status = status
+    }
+    
+    var iconImage: Image {
+        switch status {
+        case .onShelf:
+            return Image(systemName: "checkmark.diamond.fill")
+        case .inProgress:
+            return Image(systemName: "book.fill")
+        case .completed:
+            return Image(systemName: "bokk.vertical.fill")
+        }
     }
 }
 
