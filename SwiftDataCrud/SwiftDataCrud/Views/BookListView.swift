@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BookListView: View {
+    @State private var showSheet: Bool = false
     var body: some View {
         NavigationStack {
             VStack {
@@ -19,7 +20,7 @@ struct BookListView: View {
             .navigationTitle("BookList")
             .toolbar {
                 Button {
-                    
+                    showSheet = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .foregroundStyle(.orange)
@@ -27,6 +28,10 @@ struct BookListView: View {
                 }
 
                     
+            }
+            .sheet(isPresented: $showSheet) {
+                NewBookView()
+                    .presentationDetents([.medium,.large])
             }
             
         }
