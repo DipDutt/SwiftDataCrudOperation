@@ -19,7 +19,9 @@ struct NewBookView: View {
                 TextField("BookTitle", text:$bookTitle)
                 TextField("AuthorName", text:$authorName)
                 Button("Create") {
-                    
+                    let book = Book(title: bookTitle, author: authorName)
+                    context.insert(book)
+                    dismiss()
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .buttonStyle(.borderedProminent)
