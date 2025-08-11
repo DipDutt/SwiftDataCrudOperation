@@ -23,6 +23,7 @@ struct BookListView: View {
 
                 }
             }
+            .listStyle(.plain)
             .navigationTitle("BookList")
             .toolbar {
                 Button {
