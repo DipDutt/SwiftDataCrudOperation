@@ -49,4 +49,5 @@ struct BookListView: View {
 
 #Preview {
     BookListView()
+        .modelContainer(for: Book.self,inMemory: true)
 }
