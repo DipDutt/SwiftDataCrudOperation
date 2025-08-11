@@ -6,16 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BookListView: View {
     @State private var showSheet: Bool = false
+    @Query(sort:\Book.title) var books:[Book]
     var body: some View {
         NavigationStack {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!")
+            List {
+                ForEach(books) { book in
+                    NavigationLink {
+                        Text(book.title)
+                    } label: {
+                       
+                    }
+
+                }
             }
             .navigationTitle("BookList")
             .toolbar {
