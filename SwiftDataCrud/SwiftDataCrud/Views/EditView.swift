@@ -102,7 +102,6 @@ struct EditView: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
                 Button("Update") {
                     book.status = status
                     book.title = title
@@ -113,11 +112,12 @@ struct EditView: View {
                     book.dateAdded = dateAdded
                     dismiss()
                 }
+                .buttonStyle(.borderedProminent)
             }
         }
-        .buttonStyle(.borderedProminent)
+        
     }
-}
+
 
 //#Preview {
 //    NavigationStack {
