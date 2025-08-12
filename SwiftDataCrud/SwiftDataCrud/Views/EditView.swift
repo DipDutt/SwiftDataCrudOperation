@@ -17,7 +17,8 @@ struct EditView: View {
     @State private var dateAdded: Date = Date.distantPast
     @State private var dateStarted: Date = Date.distantPast
     @State private var dateCompleted: Date = Date.distantPast
-    
+    @Environment(\.dismiss) var dismiss
+    let book: Book
     var body: some View {
         HStack {
             Text("Status Type")
@@ -97,9 +98,22 @@ struct EditView: View {
                     )
         }
         .padding()
+        .textFieldStyle(.roundedBorder)
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Update") {
+                    dismiss()
+                }
+            }
+        }
+        .buttonStyle(.borderedProminent)
     }
 }
 
-#Preview {
-    EditView()
-}
+//#Preview {
+//    NavigationStack {
+//        EditView()
+//    }
+//}
