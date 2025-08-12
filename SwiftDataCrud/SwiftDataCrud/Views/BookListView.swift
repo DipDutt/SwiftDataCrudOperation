@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct BookListView: View {
-     // MARK: -  Propeties
+    // MARK: -  Propeties
     @State private var showSheet: Bool = false
     @Query(sort:\Book.title) var books:[Book]
     @Environment(\.modelContext) private var context
@@ -36,6 +36,7 @@ struct BookListView: View {
                             }
                             
                         }
+                         // MARK: - add onDelete modifier.
                         .onDelete { indexSet in
                             indexSet.forEach { indexValue in
                                 let book = books[indexValue]
@@ -48,23 +49,24 @@ struct BookListView: View {
                 }
             }
             .navigationTitle("BookList")
-                .toolbar {
-                    Button {
-                        showSheet = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundStyle(.orange)
-                            .imageScale(.large)
-                    }
-                    
-                    
+             // MARK: - add toolbar
+            .toolbar {
+                Button {
+                    showSheet = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundStyle(.orange)
+                        .imageScale(.large)
                 }
+                
+                
+            }
             
             // MARK: - present the sheet.
-                .sheet(isPresented: $showSheet) {
-                    NewBookView()
-                        .presentationDetents([.medium,.large])
-                }
+            .sheet(isPresented: $showSheet) {
+                NewBookView()
+                    .presentationDetents([.medium,.large])
+            }
             
         }
         
