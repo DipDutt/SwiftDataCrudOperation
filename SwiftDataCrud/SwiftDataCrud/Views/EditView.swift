@@ -84,7 +84,7 @@ struct EditView: View {
             }
             
             LabeledContent {
-              TextField("enter author name", text: $title)
+              TextField("enter author name", text: $author)
             } label: {
                 Text("Author Name")
             }
