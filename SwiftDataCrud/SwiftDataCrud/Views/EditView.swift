@@ -78,13 +78,13 @@ struct EditView: View {
             Divider()
             
             LabeledContent {
-              TextField("enter bookTitle", text: $title)
+                TextField("enter bookTitle", text: $title)
             } label: {
                 Text("BookTitle")
             }
             
             LabeledContent {
-              TextField("enter author name", text: $author)
+                TextField("enter author name", text: $author)
             } label: {
                 Text("Author Name")
             }
@@ -95,30 +95,29 @@ struct EditView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color.gray, lineWidth: 1)
-                    )
+                )
         }
         .padding()
         .textFieldStyle(.roundedBorder)
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-                Button("Update") {
-                    book.status = status
-                    book.title = title
-                    book.author = author
-                    book.summary = summary
-                    book.dateStarted = dateStarted
-                    book.dateCompleted = dateCompleted
-                    book.dateAdded = dateAdded
-                    dismiss()
-                }
-                .buttonStyle(.borderedProminent)
+            Button("Update") {
+                book.status = status
+                book.title = title
+                book.author = author
+                book.summary = summary
+                book.dateStarted = dateStarted
+                book.dateCompleted = dateCompleted
+                book.dateAdded = dateAdded
+                dismiss()
             }
+            .buttonStyle(.borderedProminent)
         }
         
     }
-
-
+    
+}
 //#Preview {
 //    NavigationStack {
 //        EditView()
