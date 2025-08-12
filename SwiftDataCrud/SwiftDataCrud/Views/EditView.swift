@@ -10,8 +10,8 @@ import SwiftUI
 struct EditView: View {
     // MARK: - Properties
     @State private var status = Status.onShelf
-    @State private var title: String = ""
-    @State private var author: String = ""
+    @State private var bookTitle: String = ""
+    @State private var authorName: String = ""
     @State private var rating: Int?
     @State private var summary: String = ""
     @State private var dateAdded: Date = Date.distantPast
@@ -78,13 +78,13 @@ struct EditView: View {
             Divider()
             
             LabeledContent {
-                TextField("enter bookTitle", text: $title)
+                TextField("enter bookTitle", text: $bookTitle)
             } label: {
                 Text("BookTitle")
             }
             
             LabeledContent {
-                TextField("enter author name", text: $author)
+                TextField("enter author name", text: $authorName)
             } label: {
                 Text("Author Name")
             }
@@ -99,20 +99,31 @@ struct EditView: View {
         }
         .padding()
         .textFieldStyle(.roundedBorder)
-        .navigationTitle(title)
+        .navigationTitle(bookTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button("Update") {
-                book.status = status
-                book.title = title
-                book.author = author
-                book.summary = summary
-                book.dateStarted = dateStarted
-                book.dateCompleted = dateCompleted
-                book.dateAdded = dateAdded
-                dismiss()
-            }
-            .buttonStyle(.borderedProminent)
+          
+                Button("Update") {
+                    book.status = status
+                    book.title = bookTitle
+                    book.author = authorName
+                    book.summary = summary
+                    book.dateStarted = dateStarted
+                    book.dateCompleted = dateCompleted
+                    book.dateAdded = dateAdded
+                    dismiss()
+                }
+                .buttonStyle(.borderedProminent)
+        }
+        
+        .onAppear {
+            dateStarted = book.dateStarted
+            dateCompleted = book.dateCompleted
+            dateAdded = book.dateAdded
+            authorName = book.author
+            bookTitle = book.title
+            summary = book.summary
+            status = book.status
         }
         
     }
