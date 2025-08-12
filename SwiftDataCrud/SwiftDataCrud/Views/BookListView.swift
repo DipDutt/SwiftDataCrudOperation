@@ -11,6 +11,7 @@ import SwiftData
 struct BookListView: View {
     @State private var showSheet: Bool = false
     @Query(sort:\Book.title) var books:[Book]
+    @Environment(\.modelContext) private var context
     var body: some View {
         NavigationStack {
             Group {
@@ -33,6 +34,12 @@ struct BookListView: View {
                                 }
                             }
                             
+                        }
+                        .onDelete { indexSet in
+                            indexSet.forEach { indexValue in
+                                let book = books[indexValue]
+                                context.delete(book)
+                            }
                         }
                     }
                     .listStyle(.plain)
