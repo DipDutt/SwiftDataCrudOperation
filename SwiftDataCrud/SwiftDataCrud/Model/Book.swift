@@ -47,9 +47,9 @@ final class Book {
         case .onShelf:
             return Image(systemName: "checkmark.diamond.fill")
         case .inProgress:
-            return Image(systemName: "book.fill")
+            return Image(systemName: "books.vertical")
         case .completed:
-            return Image(systemName: "bokk.vertical.fill")
+            return Image(systemName: "books.vertical.fill")
         }
     }
 }
