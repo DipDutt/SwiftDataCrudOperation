@@ -104,6 +104,13 @@ struct EditView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Update") {
+                    book.status = status
+                    book.title = title
+                    book.author = author
+                    book.summary = summary
+                    book.dateStarted = dateStarted
+                    book.dateCompleted = dateCompleted
+                    book.dateAdded = dateAdded
                     dismiss()
                 }
             }
