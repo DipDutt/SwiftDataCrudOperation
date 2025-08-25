@@ -24,7 +24,7 @@ struct BookListView: View {
                     List {
                         ForEach(books) { book in
                             NavigationLink {
-                               EditView(book: book)
+                                EditView(book: book)
                             } label: {
                                 HStack(spacing: 5) {
                                     book.iconImage
@@ -36,7 +36,7 @@ struct BookListView: View {
                             }
                             
                         }
-                         // MARK: - add onDelete modifier.
+                        // MARK: - add onDelete modifier.
                         .onDelete { indexSet in
                             indexSet.forEach { indexValue in
                                 let book = books[indexValue]
@@ -49,7 +49,7 @@ struct BookListView: View {
                 }
             }
             .navigationTitle("BookList")
-             // MARK: - add toolbar
+            // MARK: - add toolbar
             .toolbar {
                 Button {
                     showSheet = true
