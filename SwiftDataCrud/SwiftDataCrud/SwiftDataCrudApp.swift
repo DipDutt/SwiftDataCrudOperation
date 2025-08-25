@@ -19,12 +19,14 @@ struct SwiftDataCrudApp: App {
     }
     
     init() {
-        let config = ModelConfiguration(url: URL.documentsDirectory.appending(path: "MyBooks.store"))
+        
+        let schema = Schema([Book.self])
+        let config = ModelConfiguration("MyBooks",schema:schema)
         do {
-            container = try ModelContainer(for:Book.self, configurations:config)
+            container = try ModelContainer(for:schema, configurations:config)
         } catch  {
             fatalError("Error loading SwiftData: \(error.localizedDescription)")
         }
-        print(URL.documentsDirectory.path())
+        print(URL.applicationDirectory.path(percentEncoded: true))
     }
 }
