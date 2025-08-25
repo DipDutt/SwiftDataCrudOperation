@@ -17,7 +17,7 @@ struct BookListView: View {
         NavigationStack {
             Group {
                 if books.isEmpty {
-                    ContentUnavailableView("Enter Your Book TO PRESS ➕ BUTTON IN THE TOP RIGHT CORNER ", systemImage: "book.fill")
+                    ContentUnavailableView("To add Your Book tap ➕ ", systemImage: "book.fill")
                 }
                 
                 else {

@@ -19,7 +19,7 @@ struct SwiftDataCrudApp: App {
     }
     
     init() {
-        
+        // 1. Define the schema of models that this app will persist.
         let schema = Schema([Book.self])
         let config = ModelConfiguration("MyBooks",schema:schema)
         do {
