@@ -9,18 +9,18 @@ import SwiftUI
 import SwiftData
 
 struct BookList: View {
-    @Query private var books:[Book]
+    @Query private var books: [Book]
     @Environment(\.modelContext) private var context
     
-    // MARK: -  Create init for sorting Value
-    init(sort: SortOrder) {
+    // MARK: - Init for sorting value
+    init(sort: SortOder) {
         let sortDescriptors: [SortDescriptor<Book>] = switch sort {
-        case .forward:
-            [SortDescriptor(\.title, order: .forward)]
-        case .reverse:
-            [SortDescriptor(\.title, order: .reverse)]
-        @unknown default:
-            [SortDescriptor(\.title, order: .forward)]
+        case .title:
+            [SortDescriptor(\Book.title)]
+        case .author:
+            [SortDescriptor(\Book.author)]
+        case .status:
+            [SortDescriptor(\Book.status)]
         }
         
         _books = Query(sort: sortDescriptors)
