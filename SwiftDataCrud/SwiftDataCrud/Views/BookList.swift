@@ -9,8 +9,23 @@ import SwiftUI
 import SwiftData
 
 struct BookList: View {
-    @Query(sort:\Book.title) var books:[Book]
+    @Query private var books:[Book]
     @Environment(\.modelContext) private var context
+    
+    // MARK: -  Create init for sorting Value
+    init(sort: SortOrder) {
+        let sortDescriptors: [SortDescriptor<Book>] = switch sort {
+        case .forward:
+            [SortDescriptor(\.title, order: .forward)]
+        case .reverse:
+            [SortDescriptor(\.title, order: .reverse)]
+        @unknown default:
+            [SortDescriptor(\.title, order: .forward)]
+        }
+        
+        _books = Query(sort: sortDescriptors)
+    }
+    
     var body: some View {
         Group {
             if books.isEmpty {
@@ -51,7 +66,7 @@ struct BookList: View {
 #Preview {
     let preview = Preview()
     preview.addExamples(Book.sampleBooks)
-    return NavigationStack{ BookList()
+    return NavigationStack { BookList(sort:.forward)
     }
     .modelContainer(preview.container)
 }
