@@ -55,6 +55,7 @@ struct BookListView: View {
                     showSheet = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
+                        .font(.title)
                         .foregroundStyle(.orange)
                         .imageScale(.large)
                 }
