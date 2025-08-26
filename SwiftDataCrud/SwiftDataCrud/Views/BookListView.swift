@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 
-enum Sortoder:String, Identifiable,CaseIterable{
+enum SortOder:String, Identifiable,CaseIterable{
     case title
     case author
     case status
@@ -21,17 +21,17 @@ enum Sortoder:String, Identifiable,CaseIterable{
 struct BookListView: View {
     // MARK: -  Propeties
     @State private var showSheet: Bool = false
-    @State private var sortOrder:Sortoder = .title
+    @State private var sortOrder:SortOder = .title
    
     var body: some View {
         NavigationStack {
             Picker("Sort By", selection: $sortOrder) {
-                ForEach(Sortoder.allCases) { sortOrder in
+                ForEach(SortOder.allCases) { sortOrder in
                     Text("sort by :\(sortOrder.rawValue)").tag(sortOrder)
                 }
             }
             .buttonStyle(.bordered)
-            BookList()
+            BookList(sort:sortOrder)
             .navigationTitle("BookList")
             // MARK: - add toolbar
             .toolbar {

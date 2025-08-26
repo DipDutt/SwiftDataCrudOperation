@@ -29,10 +29,8 @@ struct BookList: View {
     var body: some View {
         Group {
             if books.isEmpty {
-                ContentUnavailableView("To add Your Book tap ➕ ", systemImage: "book.fill")
-            }
-            
-            else {
+                ContentUnavailableView("To add Your Book tap ➕", systemImage: "book.fill")
+            } else {
                 List {
                     ForEach(books) { book in
                         NavigationLink {
@@ -46,9 +44,7 @@ struct BookList: View {
                                 }
                             }
                         }
-                        
                     }
-                    // MARK: - add onDelete modifier.
                     .onDelete { indexSet in
                         indexSet.forEach { indexValue in
                             let book = books[indexValue]
@@ -57,7 +53,6 @@ struct BookList: View {
                     }
                 }
                 .listStyle(.plain)
-                
             }
         }
     }
@@ -66,7 +61,8 @@ struct BookList: View {
 #Preview {
     let preview = Preview()
     preview.addExamples(Book.sampleBooks)
-    return NavigationStack { BookList(sort:.forward)
+    return NavigationStack {
+        BookList(sort: .status)
     }
     .modelContainer(preview.container)
 }
