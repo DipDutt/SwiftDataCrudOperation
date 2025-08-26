@@ -8,46 +8,30 @@
 import SwiftUI
 import SwiftData
 
+
+enum Sortoder:String, Identifiable,CaseIterable{
+    case title
+    case author
+    case status
+    var id: Self {
+        self
+    }
+}
+
 struct BookListView: View {
     // MARK: -  Propeties
     @State private var showSheet: Bool = false
-    @Query(sort:\Book.title) var books:[Book]
-    @Environment(\.modelContext) private var context
+    @State private var sortOrder:Sortoder = .title
+   
     var body: some View {
         NavigationStack {
-            Group {
-                if books.isEmpty {
-                    ContentUnavailableView("To add Your Book tap ➕ ", systemImage: "book.fill")
-                }
-                
-                else {
-                    List {
-                        ForEach(books) { book in
-                            NavigationLink {
-                                EditView(book: book)
-                            } label: {
-                                HStack(spacing: 5) {
-                                    book.iconImage
-                                    VStack(alignment: .leading) {
-                                        Text(book.title).font(.title2)
-                                        Text(book.author).foregroundStyle(.secondary)
-                                    }
-                                }
-                            }
-                            
-                        }
-                        // MARK: - add onDelete modifier.
-                        .onDelete { indexSet in
-                            indexSet.forEach { indexValue in
-                                let book = books[indexValue]
-                                context.delete(book)
-                            }
-                        }
-                    }
-                    .listStyle(.plain)
-                    
+            Picker("Sort By", selection: $sortOrder) {
+                ForEach(Sortoder.allCases) { sortOrder in
+                    Text("sort by :\(sortOrder.rawValue)").tag(sortOrder)
                 }
             }
+            .buttonStyle(.bordered)
+            BookList()
             .navigationTitle("BookList")
             // MARK: - add toolbar
             .toolbar {
