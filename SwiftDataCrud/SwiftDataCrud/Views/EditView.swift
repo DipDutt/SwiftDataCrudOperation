@@ -104,7 +104,7 @@ struct EditView: View {
         .toolbar {
           
                 Button("Update") {
-                    book.status = status
+                    book.status = status.rawValue
                     book.title = bookTitle
                     book.author = authorName
                     book.summary = summary
@@ -123,7 +123,7 @@ struct EditView: View {
             authorName = book.author
             bookTitle = book.title
             summary = book.summary
-            status = book.status
+            status = Status(rawValue: book.status)!
         }
         
     }
@@ -131,7 +131,7 @@ struct EditView: View {
 }
 #Preview {
     let preview = Preview()
-    NavigationStack {
+    return NavigationStack {
         EditView(book:Book.sampleBooks[2])
     }
 }
