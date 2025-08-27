@@ -23,7 +23,10 @@ struct BookList: View {
             [SortDescriptor(\Book.status)]
         }
         
-        _books = Query(sort: sortDescriptors)
+        let predicate = #Predicate<Book> { book in
+            book.title.localizedStandardContains(filterString) || book.author.localizedStandardContains(filterString) || filterString.isEmpty
+        }
+        _books = Query(filter:predicate,sort: sortDescriptors)
     }
     
     var body: some View {
