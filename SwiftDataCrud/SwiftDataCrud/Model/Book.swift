@@ -21,6 +21,7 @@ final class Book {
     var summary: String
     var rating: Int?
     var status:Status.RawValue
+    var recommendedBy: String?
     // MARK: - init method
     init(
         title: String,
@@ -30,7 +31,8 @@ final class Book {
         dateCompleted: Date = Date.distantPast,
         summary:String = "",
         rating: Int? = nil,
-        status:Status = .onShelf
+        status:Status = .onShelf,
+        recommendedBy: String? = nil
     ) {
         self.title = title
         self.author = author
@@ -40,6 +42,7 @@ final class Book {
         self.summary = summary
         self.rating = rating
         self.status = status.rawValue
+        self.recommendedBy = recommendedBy
     }
     
     var iconImage: Image {
