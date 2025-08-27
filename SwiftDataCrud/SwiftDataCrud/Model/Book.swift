@@ -21,7 +21,7 @@ final class Book {
     var summary: String
     var rating: Int?
     var status:Status.RawValue
-    var recommendedBy: String?
+    var recommendedBy: String = ""
     // MARK: - init method
     init(
         title: String,
@@ -32,7 +32,7 @@ final class Book {
         summary:String = "",
         rating: Int? = nil,
         status:Status = .onShelf,
-        recommendedBy: String? = nil
+        recommendedBy: String = ""
     ) {
         self.title = title
         self.author = author
