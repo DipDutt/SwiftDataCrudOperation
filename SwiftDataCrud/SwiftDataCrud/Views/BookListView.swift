@@ -22,6 +22,7 @@ struct BookListView: View {
     // MARK: -  Propeties
     @State private var showSheet: Bool = false
     @State private var sortOrder:SortOder = .title
+    @State private var filterData:String = ""
    
     var body: some View {
         NavigationStack {
@@ -32,6 +33,7 @@ struct BookListView: View {
             }
             .buttonStyle(.bordered)
             BookList(sort:sortOrder)
+                .searchable(text:$filterData,prompt: Text("enter title for filter"))
             .navigationTitle("BookList")
             // MARK: - add toolbar
             .toolbar {
