@@ -32,7 +32,7 @@ struct BookListView: View {
                 }
             }
             .buttonStyle(.bordered)
-            BookList(sort:sortOrder)
+            BookList(sort:sortOrder, filterString:filterData)
                 .searchable(text:$filterData,prompt: Text("enter title for filter"))
             .navigationTitle("BookList")
             // MARK: - add toolbar
