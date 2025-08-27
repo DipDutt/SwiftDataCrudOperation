@@ -13,7 +13,7 @@ struct BookList: View {
     @Environment(\.modelContext) private var context
     
     // MARK: - Init for sorting value
-    init(sort: SortOder) {
+    init(sort: SortOder,filterString:String) {
         let sortDescriptors: [SortDescriptor<Book>] = switch sort {
         case .title:
             [SortDescriptor(\Book.title)]
@@ -62,7 +62,7 @@ struct BookList: View {
     let preview = Preview()
     preview.addExamples(Book.sampleBooks)
     return NavigationStack {
-        BookList(sort: .status)
+        BookList(sort: .status, filterString: "",)
     }
     .modelContainer(preview.container)
 }
