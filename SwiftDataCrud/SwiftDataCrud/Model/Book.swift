@@ -79,3 +79,6 @@ enum Status:Int,Codable,CaseIterable,Identifiable {
     }
     
 }
+
+/// if you rename  of property name after rename
+/// use @Attribute(originalName:name)
