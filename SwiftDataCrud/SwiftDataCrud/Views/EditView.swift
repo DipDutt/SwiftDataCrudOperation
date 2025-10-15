@@ -130,7 +130,7 @@ struct EditView: View {
     
 }
 #Preview {
-    let preview = Preview()
+   
     return NavigationStack {
         EditView(book:Book.sampleBooks[2])
     }
