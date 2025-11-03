@@ -40,7 +40,7 @@ struct QuoteListView: View {
                     .buttonStyle(.bordered)
                    
                 }
-                Button(isEditing ? "Update" :"Create") {
+                Button(isEditing ? "Update":"Create") {
                     if isEditing {
                         selectedQuote?.page = page.isEmpty ? nil : page
                         selectedQuote?.text = text
