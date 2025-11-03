@@ -102,18 +102,17 @@ struct EditView: View {
         .navigationTitle(bookTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          
-                Button("Update") {
-                    book.status = status.rawValue
-                    book.title = bookTitle
-                    book.author = authorName
-                    book.summary = summary
-                    book.dateStarted = dateStarted
-                    book.dateCompleted = dateCompleted
-                    book.dateAdded = dateAdded
-                    dismiss()
-                }
-                .buttonStyle(.borderedProminent)
+            Button("Update") {
+                book.status = status.rawValue
+                book.title = bookTitle
+                book.author = authorName
+                book.summary = summary
+                book.dateStarted = dateStarted
+                book.dateCompleted = dateCompleted
+                book.dateAdded = dateAdded
+                dismiss()
+            }
+            .buttonStyle(.borderedProminent)
         }
         
         .onAppear {
@@ -130,7 +129,7 @@ struct EditView: View {
     
 }
 #Preview {
-   
+    
     return NavigationStack {
         EditView(book:Book.sampleBooks[2])
     }
