@@ -23,7 +23,7 @@ struct QuoteListView: View {
    // MARK: - Body
     var body: some View {
         GroupBox {
-            HStack {
+            HStack(spacing: 20) {
                 LabeledContent("Page") {
                     TextField("page #", text:$page)
                         .autocorrectionDisabled()
@@ -31,7 +31,6 @@ struct QuoteListView: View {
                         .frame(width: 150)
                         Spacer()
                 }
-                
                 if isEditing {
                     Button("Cancel") {
                         page = ""
@@ -39,9 +38,32 @@ struct QuoteListView: View {
                         selectedQuote = nil
                     }
                     .buttonStyle(.bordered)
+                   
                 }
+                Button(isEditing ? "Update" :"Create") {
+                    if isEditing {
+                        selectedQuote?.page = page.isEmpty ? nil : page
+                        selectedQuote?.text = text
+                        text = ""
+                        page = ""
+                        selectedQuote = nil
+                    }
+                    
+                    else {
+                        let quote = page.isEmpty ? Quote(text: text) : Quote(text:text, page:page)
+                        book.quotes?.append(quote)
+                        text = ""
+                        page = ""
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(text.isEmpty)
             }
+            TextEditor(text: $text)
+                .border(Color.gray,width: 3)
+                .frame(height: 100)
         }
+        .padding(.horizontal, 10)
     }
 }
 
