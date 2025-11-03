@@ -31,6 +31,15 @@ struct QuoteListView: View {
                         .frame(width: 150)
                         Spacer()
                 }
+                
+                if isEditing {
+                    Button("Cancel") {
+                        page = ""
+                        text = ""
+                        selectedQuote = nil
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
         }
     }
