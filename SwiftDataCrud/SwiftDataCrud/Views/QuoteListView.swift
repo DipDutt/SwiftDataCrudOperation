@@ -17,7 +17,6 @@ struct QuoteListView: View {
 
 #Preview {
     let preview = Preview()
-    let books = Book.sampleBooks
     preview.addExamples(Book.sampleBooks)
         return QuoteListView(book:Book.sampleBooks[4])
     .modelContainer(preview.container)
