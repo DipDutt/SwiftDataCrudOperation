@@ -22,7 +22,17 @@ struct QuoteListView: View {
     
    // MARK: - Body
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GroupBox {
+            HStack {
+                LabeledContent("Page") {
+                    TextField("page #", text:$page)
+                        .autocorrectionDisabled()
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 150)
+                        Spacer()
+                }
+            }
+        }
     }
 }
 
