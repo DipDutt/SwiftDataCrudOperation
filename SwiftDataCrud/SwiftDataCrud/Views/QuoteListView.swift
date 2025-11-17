@@ -14,9 +14,13 @@ struct QuoteListView: View {
         @State private var text = ""
         @State private var page = ""
         @State private var selectedQuote: Quote?
+    
+     // MARK: - Add Computed Property.
         var isEditing: Bool {
             selectedQuote != nil
         }
+    
+     // MARK: - Main Body
         var body: some View {
             GroupBox {
                 HStack {
@@ -57,6 +61,8 @@ struct QuoteListView: View {
                     .frame(height: 100)
             }
             .padding(.horizontal)
+            
+             // MARK: - Add List To show 
             List {
                 let sortedQuotes = book.quotes?.sorted(using: KeyPathComparator(\Quote.creationDate)) ?? []
                 ForEach(sortedQuotes) { quote in
@@ -89,6 +95,7 @@ struct QuoteListView: View {
                     }
                 }
             }
+            .padding(.horizontal, 10)
             .listStyle(.plain)
             .navigationTitle("Quotes")
             .navigationBarTitleDisplayMode(.inline)
