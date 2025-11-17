@@ -18,6 +18,7 @@ final class Quote {
         self.text = text
         self.page = page
     }
-    var book:Book?
+    
+      var book: Book?
     
 }

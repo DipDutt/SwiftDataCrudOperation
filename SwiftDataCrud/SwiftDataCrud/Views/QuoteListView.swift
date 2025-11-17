@@ -9,69 +9,98 @@ import SwiftUI
 
 struct QuoteListView: View {
     // MARK: - Properties
-    @Environment(\.managedObjectContext) var context
-    let book:Book
-    @State private var text: String = ""
-    @State private var page: String = ""
-    @State private var selectedQuote:Quote?
-    
-     // MARK: - computed property
-    var isEditing: Bool {
-        selectedQuote != nil
-    }
-    
-   // MARK: - Body
-    var body: some View {
-        GroupBox {
-            HStack(spacing: 20) {
-                LabeledContent("Page") {
-                    TextField("page #", text:$page)
-                        .autocorrectionDisabled()
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 150)
-                        Spacer()
-                }
-                if isEditing {
-                    Button("Cancel") {
-                        page = ""
-                        text = ""
-                        selectedQuote = nil
-                    }
-                    .buttonStyle(.bordered)
-                   
-                }
-                Button(isEditing ? "Update":"Create") {
-                    if isEditing {
-                        selectedQuote?.page = page.isEmpty ? nil : page
-                        selectedQuote?.text = text
-                        text = ""
-                        page = ""
-                        selectedQuote = nil
-                    }
-                    
-                    else {
-                        let quote = page.isEmpty ? Quote(text: text) : Quote(text:text, page:page)
-                        book.quotes?.append(quote)
-                        text = ""
-                        page = ""
-                    }
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(text.isEmpty)
-            }
-            TextEditor(text: $text)
-                .border(Color.gray,width: 3)
-                .frame(height: 100)
+    @Environment(\.modelContext) private var modelContext
+        let book: Book
+        @State private var text = ""
+        @State private var page = ""
+        @State private var selectedQuote: Quote?
+        var isEditing: Bool {
+            selectedQuote != nil
         }
-        .padding(.horizontal, 10)
+        var body: some View {
+            GroupBox {
+                HStack {
+                    LabeledContent("Page") {
+                        TextField("page #", text: $page)
+                            .autocorrectionDisabled()
+                            .textFieldStyle(.roundedBorder)
+                            .frame(width: 150)
+                        Spacer()
+                    }
+                    if isEditing {
+                        Button("Cancel") {
+                            page = ""
+                            text = ""
+                            selectedQuote = nil
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    Button(isEditing ? "Update" : "Create") {
+                        if isEditing {
+                            selectedQuote?.text = text
+                            selectedQuote?.page = page.isEmpty ? nil : page
+                            page = ""
+                            text = ""
+                            selectedQuote = nil
+                        } else {
+                            let quote = page.isEmpty ? Quote(text: text) : Quote(text: text, page: page)
+                            book.quotes?.append(quote)
+                            text = ""
+                            page = ""
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(text.isEmpty)
+                }
+                TextEditor(text: $text)
+                    .border(Color.secondary)
+                    .frame(height: 100)
+            }
+            .padding(.horizontal)
+            List {
+                let sortedQuotes = book.quotes?.sorted(using: KeyPathComparator(\Quote.creationDate)) ?? []
+                ForEach(sortedQuotes) { quote in
+                    VStack(alignment: .leading) {
+                        Text(quote.creationDate, format: .dateTime.month().day().year())
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(quote.text)
+                        HStack {
+                            Spacer()
+                            if let page = quote.page, !page.isEmpty {
+                                Text("Page: \(page)")
+                            }
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        selectedQuote = quote
+                        text = quote.text
+                        page = quote.page ?? ""
+                    }
+                }
+                .onDelete { indexSet in
+                    withAnimation {
+                        indexSet.forEach { index in
+                           if let quote = book.quotes?[index] {
+                              modelContext.delete(quote)
+                            }
+                        }
+                    }
+                }
+            }
+            .listStyle(.plain)
+            .navigationTitle("Quotes")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
-}
-
- // MARK: - Preview
+// MARK: - Preview
 #Preview {
     let preview = Preview()
     preview.addExamples(Book.sampleBooks)
-        return QuoteListView(book:Book.sampleBooks[4])
-    .modelContainer(preview.container)
+    return NavigationStack {
+        QuoteListView(book:Book.sampleBooks[4])
+            .modelContainer(preview.container)
+    }
     
 }

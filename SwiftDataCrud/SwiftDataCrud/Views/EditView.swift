@@ -96,6 +96,14 @@ struct EditView: View {
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color.gray, lineWidth: 1)
                 )
+            NavigationLink {
+                QuoteListView(book: book)
+            } label: {
+                let count = book.quotes?.count ?? 0
+                Label("\(count)", systemImage: "quote.opening")
+            }
+            .buttonStyle(.borderedProminent)
+
         }
         .padding()
         .textFieldStyle(.roundedBorder)
